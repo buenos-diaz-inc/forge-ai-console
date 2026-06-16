@@ -4,6 +4,7 @@ export const NAV_ITEMS = [
   { label: "Datasets", href: "/datasets" },
   { label: "Experiments", href: "/experiments" },
   { label: "Deployments", href: "/deployments" },
+  { label: "About", href: "/about" },
   { label: "Settings", href: "/settings" },
 ] as const;
 
@@ -13,6 +14,7 @@ export const ROUTE_TITLES: Record<string, string> = {
   "/datasets": "Datasets",
   "/experiments": "Experiments",
   "/deployments": "Deployments",
+  "/about": "About",
   "/settings": "Settings",
 };
 
