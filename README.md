@@ -21,9 +21,11 @@ and the class-driven theme system.
 
 ```bash
 pnpm install
-pnpm dev        # http://localhost:3000
-pnpm storybook  # http://localhost:6006
-pnpm build      # production build
+pnpm dev              # http://localhost:3000
+pnpm storybook        # http://localhost:6006
+pnpm lint             # app lint checks
+pnpm build            # production build
+pnpm build-storybook  # static Storybook build
 ```
 
 ## Routes
