@@ -181,7 +181,7 @@ export const StatCard = React.forwardRef<HTMLDivElement, StatCardProps>(
         data-loading={loading || undefined}
         className={cn("h-full", className)}
         {...props}
-      >
+       style={{ backgroundColor: '#FBBF24' }}>
         {body}
       </Card>
     );
