@@ -177,7 +177,7 @@ export const StatCard = React.forwardRef<HTMLDivElement, StatCardProps>(
         ref={ref}
         variant={surfaceVariant}
         padding="md"
-        radius="lg"
+        radius="2xl"
         data-loading={loading || undefined}
         className={cn("h-full", className)}
         {...props}
