@@ -74,7 +74,7 @@ extract the variant options:
 | Component     | File                                      | Variants                                                  |
 | ------------- | ----------------------------------------- | --------------------------------------------------------- |
 | `Button`      | `components/ui/button.tsx`                | `variant`, `size`, `fullWidth`, `loading`                 |
-| `Card`        | `components/ui/card.tsx`                   | `variant`, `padding`, `radius`, `tone`, `interactive`     |
+| `Card`        | `components/ui/card.tsx`                   | `variant`, `padding`, `radius`, `tone`, `interactive`, `selected`, `loading` |
 | `Badge`       | `components/ui/badge.tsx`                  | `variant`, `size`, `shape`, `interactive`, `dot`          |
 | `Input`       | `components/ui/input.tsx`                  | `variant`, `size`                                         |
 | `Avatar`      | `components/ui/avatar.tsx`                 | `size`, `shape`, `tone`, `ring`, `interactive`, `status`  |
@@ -83,7 +83,7 @@ extract the variant options:
 | `Progress`    | `components/ui/progress.tsx`              | `size`, `tone`                                            |
 | `Separator`   | `components/ui/separator.tsx`             | `orientation`, `tone`                                     |
 | `Sparkline`   | `components/ui/sparkline.tsx`             | `tone`, `size`, `fillArea`                                |
-| `StatCard`    | `components/ui/stat-card.tsx`             | `layout`, `align`, `tone`, `trend`, `surface`             |
+| `StatCard`    | `components/ui/stat-card.tsx`             | `layout`, `align`, `tone`, `trend`, `surface`, `loading`  |
 | `StatusBadge` | `components/ui/status-badge.tsx`          | `tone`, `size`, `pulse`                                   |
 | `EmptyState`  | `components/ui/empty-state.tsx`           | `size`, `tone`                                            |
 | `Sidebar`     | `components/layout/sidebar.tsx`           | `width`                                                   |
@@ -96,7 +96,8 @@ All variant props are **typed unions** (via `VariantProps<typeof xxxVariants>`) 
 2. Soffi's AST inspector extracts the TS union in Phase 2
 3. Soffi's CVA extractor reads the `cva()` config in Phase 3
 
-Components are plain function / `forwardRef` components with explicit `displayName`s, so Soffi's
+Components are plain function / `forwardRef` components. The `forwardRef` primitives set explicit
+`displayName`s, and named function exports preserve readable component names, so Soffi's
 React-fiber walk resolves each element to its component name, file, and line.
 
 ### Layout philosophy
