@@ -96,7 +96,8 @@ All variant props are **typed unions** (via `VariantProps<typeof xxxVariants>`) 
 2. Soffi's AST inspector extracts the TS union in Phase 2
 3. Soffi's CVA extractor reads the `cva()` config in Phase 3
 
-Components are plain function / `forwardRef` components with explicit `displayName`s, so Soffi's
+Components are plain function / `forwardRef` components. The `forwardRef` primitives set explicit
+`displayName`s, and named function exports preserve readable component names, so Soffi's
 React-fiber walk resolves each element to its component name, file, and line.
 
 ### Layout philosophy
