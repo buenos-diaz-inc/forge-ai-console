@@ -121,8 +121,8 @@ context only mirrors the class into React state so the charts can recolor reacti
 
 Stories live in `stories/*.stories.tsx`, one per primitive, titled `UI/<Component>`. Each
 story's `argTypes` enumerate the component's CVA variant options, and a Storybook theme toolbar
-toggles the `.dark` class so token edits preview in both themes. Story filenames match the
-component name (e.g. `Button.stories.tsx`) so Soffi's `manifest.ts` can map component → story.
+toggles the `.dark` class so token edits preview in both themes. Story filenames still match the
+component name (e.g. `Button.stories.tsx`).
 
 > **Builder note:** this app uses the **`@storybook/react-vite`** framework rather than
 > `@storybook/nextjs`. The webpack-based Next.js builder for Storybook 8.x currently crashes
