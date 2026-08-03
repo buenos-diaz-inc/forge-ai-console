@@ -68,35 +68,38 @@ and the rest of the UI together — in both themes.
 
 ### Components (CVA)
 
-Each primitive uses [class-variance-authority](https://cva.style/) so Soffi's AST inspector can
-extract the variant options:
+Each listed primitive uses [class-variance-authority](https://cva.style/) for its class variants.
+Soffi's AST inspector can extract the `cva()` options; notable props declared outside that
+configuration are listed separately as additional component props:
 
-| Component     | File                                      | Variants                                                  |
-| ------------- | ----------------------------------------- | --------------------------------------------------------- |
-| `Button`      | `components/ui/button.tsx`                | `variant`, `size`, `fullWidth`, `loading`                 |
-| `Card`        | `components/ui/card.tsx`                   | `variant`, `padding`, `radius`, `tone`, `interactive`     |
-| `Badge`       | `components/ui/badge.tsx`                  | `variant`, `size`, `shape`, `interactive`, `dot`          |
-| `Input`       | `components/ui/input.tsx`                  | `variant`, `size`                                         |
-| `Avatar`      | `components/ui/avatar.tsx`                 | `size`, `shape`, `tone`, `ring`, `interactive`, `status`  |
-| `Tabs`        | `components/ui/tabs.tsx`                   | `variant` (underline / pill / segmented)                  |
-| `Table`       | `components/ui/table.tsx`                  | `density`, `variant`                                      |
-| `Progress`    | `components/ui/progress.tsx`              | `size`, `tone`                                            |
-| `Separator`   | `components/ui/separator.tsx`             | `orientation`, `tone`                                     |
-| `Sparkline`   | `components/ui/sparkline.tsx`             | `tone`, `size`, `fillArea`                                |
-| `StatCard`    | `components/ui/stat-card.tsx`             | `layout`, `align`, `tone`, `trend`, `surface`             |
-| `StatusBadge` | `components/ui/status-badge.tsx`          | `tone`, `size`, `pulse`                                   |
-| `EmptyState`  | `components/ui/empty-state.tsx`           | `size`, `tone`                                            |
-| `Sidebar`     | `components/layout/sidebar.tsx`           | `width`                                                   |
-| `Topbar`      | `components/layout/topbar.tsx`            | `density`                                                 |
-| `PageHeader`  | `components/layout/page-header.tsx`       | `size`, `align`                                           |
+| Component     | File                                      | CVA variants                                      | Additional component props |
+| ------------- | ----------------------------------------- | ------------------------------------------------ | -------------------------- |
+| `Button`      | `components/ui/button.tsx`                | `variant`, `size`, `fullWidth`                   | `loading`                  |
+| `Card`        | `components/ui/card.tsx`                  | `variant`, `padding`, `radius`, `tone`, `interactive`, `selected`, `loading` | — |
+| `Badge`       | `components/ui/badge.tsx`                 | `variant`, `size`, `shape`, `interactive`        | `dot`                      |
+| `Input`       | `components/ui/input.tsx`                 | `variant`, `size`                                | —                          |
+| `Avatar`      | `components/ui/avatar.tsx`                | `size`, `shape`, `tone`, `ring`, `interactive`   | `status`                   |
+| `Tabs`        | `components/ui/tabs.tsx`                  | `variant` (underline / pill / segmented)        | —                          |
+| `Table`       | `components/ui/table.tsx`                 | `density`, `variant`                             | —                          |
+| `Progress`    | `components/ui/progress.tsx`              | `size`, `tone`                                   | —                          |
+| `Separator`   | `components/ui/separator.tsx`             | `orientation`, `tone`                            | —                          |
+| `Sparkline`   | `components/ui/sparkline.tsx`             | `tone`, `size`                                   | `fillArea`                 |
+| `StatCard`    | `components/ui/stat-card.tsx`             | `layout`, `align`                                | `tone`, `trend`, `surface`, `loading` |
+| `StatusBadge` | `components/ui/status-badge.tsx`          | `tone`, `size`, `pulse`                           | —                          |
+| `EmptyState`  | `components/ui/empty-state.tsx`           | `size`, `tone`                                   | —                          |
+| `Sidebar`     | `components/layout/sidebar.tsx`            | `width`                                          | —                          |
+| `Topbar`      | `components/layout/topbar.tsx`             | `density`                                        | —                          |
+| `PageHeader`  | `components/layout/page-header.tsx`        | `size`, `align`                                  | —                          |
 
-All variant props are **typed unions** (via `VariantProps<typeof xxxVariants>`) so:
+CVA variant props are **typed unions** (via `VariantProps<typeof xxxVariants>`), while additional
+props are declared in each component's props interface, so:
 
 1. TypeScript autocompletes them at the JSX call site
 2. Soffi's AST inspector extracts the TS union in Phase 2
 3. Soffi's CVA extractor reads the `cva()` config in Phase 3
 
-Components are plain function / `forwardRef` components with explicit `displayName`s, so Soffi's
+Components are plain function / `forwardRef` components. The `forwardRef` primitives set explicit
+`displayName`s, and named function exports preserve readable component names, so Soffi's
 React-fiber walk resolves each element to its component name, file, and line.
 
 ### Layout philosophy
@@ -118,10 +121,12 @@ context only mirrors the class into React state so the charts can recolor reacti
 
 ## Storybook
 
-Stories live in `stories/*.stories.tsx`, one per primitive, titled `UI/<Component>`. Each
-story's `argTypes` enumerate the component's CVA variant options, and a Storybook theme toolbar
-toggles the `.dark` class so token edits preview in both themes. Story filenames match the
-component name (e.g. `Button.stories.tsx`) so Soffi's `manifest.ts` can map component → story.
+Stories for the `components/ui` primitives live in `stories/*.stories.tsx`, with one story per
+listed UI component, titled `UI/<Component>`. The layout components listed above (`Sidebar`,
+`Topbar`, and `PageHeader`) do not currently have stories. Each story's `argTypes` enumerate the
+component's CVA variant options, and a Storybook theme toolbar toggles the `.dark` class so token
+edits preview in both themes. Story filenames still match the component name (e.g.
+`Button.stories.tsx`).
 
 > **Builder note:** this app uses the **`@storybook/react-vite`** framework rather than
 > `@storybook/nextjs`. The webpack-based Next.js builder for Storybook 8.x currently crashes
